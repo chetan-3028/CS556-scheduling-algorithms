@@ -419,27 +419,4 @@ For each time slot t:
 
 ---
 
-## 📈 Results
-
-### Total Service Time
-
-```
-FIFO          ████████████████████  t = 10  ❌
-iSLIP         ██████████████████    t = 9
-VOQ Optimal   ████████████          t = 6   ✅
-              0    2    4    6    8    10
-```
-
-### Performance Summary
-
-| Metric | 🟥 FIFO | 🟩 VOQ Optimal | 🟦 iSLIP |
-|--------|:-------:|:--------------:|:--------:|
-| **Completion time** | t = 10 | **t = 6** ✅ | t = 9 |
-| **Avg throughput (pkt/slot)** | 1.64 | **2.57** ✅ | 1.80 |
-| **Max backlog** | 6 | **2** ✅ | 6 |
-| **HoL blocking events** | **7** ❌ | 0 ✅ | 0 ✅ |
-| **Link utilisation** | 54.5% | **85.7%** ✅ | 60.0% |
-| **Time complexity** | O(N) | O(N!) ❌ | **O(N)** ✅ |
-
-> [!TIP]
 > **Key takeaway:** VOQ + iSLIP is the practical winner — it eliminates HoL blocking and runs in O(N) time, finishing only 3 slots after the theoretically optimal result. In real switches (N = 64, 128, …), the O(N!) exhaustive matching is completely infeasible; iSLIP with multiple iterations converges to near-optimal performance.
